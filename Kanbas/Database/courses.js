@@ -1,0 +1,100 @@
+export default [
+    {
+        "_id": "RS101",
+        "name": "React JS",
+        "number": "CS1234",
+        "image": "reactjs.jpg",
+        "color": "navy",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "Computer Science",
+        "credits": 4,
+        "description": "This course provides an in-depth study of the fundamentals of full stack software development."
+    },
+    {
+        "_id": "RS102",
+        "name": "Rocket Propulsion",
+        "number": "RS4550",
+        "image": "rocket.jpg",
+        "color": "skyblue",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "Engineering",
+        "credits": 4,
+        "description": "This course provides an in-depth study of the fundamentals of rocket propulsion, covering topics such as propulsion theory, engine types, fuel chemistry, and the practical applications of rocket technology. Designed for students with a strong background in physics and engineering, the course includes both theoretical instruction and hands-on laboratory work"
+    },
+    {
+        "_id": "RS103",
+        "name": "Python Programming",
+        "number": "CS5001",
+        "image": "python.png",
+        "color": "gold",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "Computer Science",
+        "credits": 4,
+        "description": "This course delves into the principles and practices of programming with Python."
+    },
+    {
+        "_id": "RS104",
+        "name": "OOP with Java",
+        "number": "CS5004",
+        "image": "java.jpg",
+        "color": "peru",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "Computer Science",
+        "credits": 3,
+        "description": "Learn the concepts of Object Oriented Programming with Java."
+    },
+    {
+        "_id": "RS105",
+        "name": "Algorithm",
+        "number": "CS5800",
+        "image": "algo.jpg",
+        "color": "teal",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "Computer Science",
+        "credits": 3,
+        "description": "This course provides an in-depth study of Data Structure and Algorithms."
+    },
+    {
+        "_id": "RS106",
+        "name": "Discrete Structures",
+        "number": "CS5002",
+        "image": "discrete.jpeg",
+        "color": "darkolivegreen",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "Computer Science",
+        "credits": 3,
+        "description": "Introduction to Discrete Mathematics."
+    },
+    {
+        "_id": "RS107",
+        "name": "Rock Climbing",
+        "number": "SP3361",
+        "image": "rock.jpg",
+        "color": "lightsalmon",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "Sports",
+        "credits": 3,
+        "description": "This course offers Bouldering Techniques and Strength Training.",
+        "author": "654f9ec2ea7ead465908d1e3"
+    },
+    {
+        "_id": "RS108",
+        "name": "Canyonneering",
+        "number": "SP3710",
+        "image": "canyon.jpg",
+        "color": "goldenrod",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "Sports",
+        "credits": 4,
+        "description": "This course explores the many aspects of canyonneering.",
+        "author": "654f9ec2ea7ead465908d1e3"
+    }
+]
