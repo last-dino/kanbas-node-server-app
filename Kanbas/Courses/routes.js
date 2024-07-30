@@ -1,6 +1,6 @@
 import * as dao from "./dao.js";
 
-export default function ModuleRoutes(app) {
+export default function CourseRoutes(app) {
     const createCourse = async (req, res) => {
         const course = await dao.createCourse(req.body);
         res.json(course);
@@ -10,13 +10,11 @@ export default function ModuleRoutes(app) {
         res.json(courses); 
     }
     const updateCourse = async (req, res) => {
-        const course = await dao.findCourseByNumber(req.params.id);
-        const status = await dao.updateCourse(course._id, req.body);
+        const status = await dao.updateCourse(req.params.id, req.body);
         res.json(status);
     }
     const deleteCourse = async (req, res) => {
-        const course = await dao.findCourseByNumber(req.params.id);
-        const status = await dao.deleteCourse(course._id);
+        const status = await dao.deleteCourse(req.params.id);
         res.json(status);
     }
         

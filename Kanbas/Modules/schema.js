@@ -12,6 +12,7 @@ const moduleSchema = new mongoose.Schema({
         description: String,
         course: String,
         lessons: [lessonSchema],
+        default: []
     },
     { collection: "modules" }
 );

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const courseSchema = new mongoose.Schema({
+const assignmentSchema = new mongoose.Schema({
         title: String,
         course: String,
         available: Date,
@@ -8,6 +8,6 @@ const courseSchema = new mongoose.Schema({
         points: Number, 
         description: String,
     },
-    { collection: "courses" }
+    { collection: "assignments" }
 );
-export default courseSchema;
+export default assignmentSchema;
