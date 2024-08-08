@@ -3,8 +3,9 @@ import { findCourseById } from "../Courses/dao.js";
 
 export default function QuizRoutes(app) {
     const findQuizByCourse = async (req, res) => {
+        console.log("findQuizByCourse");
         const course = await findCourseById(req.params.cid);
-        const quizzes = await dao.findQuizByCourse(course.number);
+        const quizzes = await dao.findQuizByCourse(course._id);
         res.json(quizzes); 
     }
     app.get("/api/courses/:cid/quizzes", findQuizByCourse);
@@ -12,7 +13,6 @@ export default function QuizRoutes(app) {
     const findAllQuizzes = async (req, res) => {
         const quizzes = await dao.findAllQuizzes()
         console.log("findallquize");
-        console.log(quizzes);
         res.json(quizzes)
     }
     app.get("/api/quizzes", findAllQuizzes);
@@ -29,23 +29,15 @@ export default function QuizRoutes(app) {
     };
     app.get("/api/quizzes/:quizId", findQuizById)
 
-    const findQuizzesForCourse = async (req, res) => {
-        const { courseId }  = req.params;
-        const course = await findCourseById(req.params.cid);
-        const assignments = await dao.findAssignmentByCourse(course.number);
-        console.log("findQuizzesForCourse");
-        const quizzes = await dao.findQuizzesForCourse(courseId)
-        res.json(quizzes)
-    }
-    app.get("/api/courses/:courseId/quizzes", findQuizzesForCourse)
-
     const createQuiz = async (req, res) => {
-        const quiz  = req.body
         console.log("createQuiz");
+        const quiz  = req.body
+        const course = await findCourseById(req.params.cid);
+        quiz.course = course._id;
         const newQuiz = await dao.createQuiz(quiz)
         res.json(newQuiz)
     }
-    app.post("/api/quizzes/addQuiz", createQuiz);
+    app.post("/api/courses/:cid/quizzes", createQuiz);
 
     const deleteQuiz = async (req, res) => {
         console.log("deleteQuiz");
@@ -57,10 +49,8 @@ export default function QuizRoutes(app) {
     const updateQuiz = async (req, res) => {
         const { quizId } = req.params;
         const quiz = req.body
-        console.log("updateQuiz")
         const status = await dao.updateQuiz(quizId, quiz);
-        console.log(quiz.published)
-        res.json(status);
+        res.json(quiz);
     };
     app.put("/api/quizzes/:quizId", updateQuiz)
 }
