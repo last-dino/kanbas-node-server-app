@@ -1,34 +1,31 @@
 import mongoose from "mongoose";
 
-// const questionSchema = new mongoose.Schema({
-//     question: String,
-//     answer: String
-// });
-
-const quizSchema = new mongoose.Schema({
-    course: {type: String, required: true},
-    title: String,
-    // quizGroup: {
-    //     type: String,
-    //     enum: ["Quizzes", "Exams", "Assignments", "Project"],
-    //     default: "Quizzes"
-    // },
-    // shuffleAnswers: {type: Boolean, default: true},
-    // timeLimit: {type: String, default: "20"},
-    // multipleAttempts: {type: Boolean, default: false},
-    // showCorrectAnswers: Boolean,
-    // accessCode: {type: String, default: "None"},
-    // oneQuestionAtTime: {type: Boolean, default: true},
-    // webcamRequried: {type: Boolean, default: false},
-    // lockQuestionsAfterAnswering: {type: Boolean, default: false},
-    // published: {type: Boolean, default: false},
-    available: String,
-    due: String,
-    // untilDate: {type: String, default: "Forever"},
-    points: String,
-    // open: {type: Boolean, default: false},
-    // questions: [questionSchema],
+const schema = new mongoose.Schema({
+    course: { type: String, required: true },
+    title: { type: String, required: true },
+    quizType:{
+        type: String,
+        enum: ["Graded Quiz", "Practice Quiz", "Graded Survey", "Ungraded Survey"],
+        default: "Graded Quiz"
+    },
+    assignmentGroup: {
+        type: String,
+        enum: ["Quizzes", "Exams", "Assignments", "Project"],
+        default: "Quizzes"
+    },
+    shuffleAnswers: { type: Boolean, default: true },
+    timeLimit: { type: Number, default: 20 }, 
+    multipleAttempts: { type: Number, default: 1 }, 
+    showCorrectAnswers: Boolean,
+    accessCode: { type: String, default: "None" },
+    oneQuestionAtTime: { type: Boolean, default: true },
+    webcamRequired: { type: Boolean, default: false },  
+    lockQuestionsAfterAnswering: { type: Boolean, default: false },
+    published: { type: Boolean, default: false },
+    available: Date,
+    due: Date,
+    until: Date,  
+    points: Number,
 },
-    { collection: "quizzes"});
-
-export default quizSchema;
+    { collection: "quizzes" });
+export default schema;
