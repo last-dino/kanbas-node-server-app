@@ -1,6 +1,19 @@
 import mongoose from "mongoose";
 
-const schema = new mongoose.Schema({
+const questionSchema = new mongoose.Schema({
+    title: String,
+    questionType: {
+        type: String,
+        enum: ["Multiple Choice", "True False", "Fill In the Blank"],
+        default: "Multiple Choice"
+    },
+    question: String,
+    answers: [String],
+    correctAnswer: String,
+    points: Number
+});
+
+const quizSchema = new mongoose.Schema({
     course: { type: String, required: true },
     title: { type: String, required: true },
     quizType:{
@@ -26,6 +39,8 @@ const schema = new mongoose.Schema({
     due: Date,
     until: Date,  
     points: Number,
+    questions: {type: [questionSchema], default: []}
 },
-    { collection: "quizzes" });
-export default schema;
+    { collection: "quizzes"});
+
+export default quizSchema;
