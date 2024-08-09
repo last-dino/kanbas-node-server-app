@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/last-dino/kanbas-node-server-app#readme",
   "dependencies": {
+    "axios": "^1.7.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

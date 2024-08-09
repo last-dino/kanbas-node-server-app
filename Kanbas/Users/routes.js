@@ -1,10 +1,54 @@
 import * as dao from "./dao.js";
 
 export default function UserRoutes(app) {
-    const createUser = async (req, res) => {
-        const user = await dao.createUser(req.body);
-        res.json(user);
+    const register = async (req, res) => {
+        try {
+            const {username} = req.body;
+            const oldUser = await dao.findUserByUsername(username);
+            if (oldUser) {
+                res.status(400).json({ message: "Username already taken" });
+                return;
+            }
+            const oldUser2 = await dao.findUserByEmailAddress(req.body.email);
+            if (oldUser2) {
+                res.status(400).json({ message: "Email already taken" });
+                return;
+            }
+
+
+            const user = await dao.createUser(req.body);
+            res.json(user);
+        } catch (err) {
+            console.log(err);
+            res.status(400).json({ message: err.message });
+        }
     };
+
+
+    const login = async (req, res) => {
+        try {
+            const {username, password} = req.body;
+            const oldUser = await dao.findUserByUsername(username);
+            if (!oldUser) {
+                res.status(404).json({ message: "User not exist" });
+                return;
+            }
+
+            if (oldUser.password !== password) {
+                res.status(400).json({ message: "Password not correct" });
+                return;
+            }
+
+            delete oldUser.password;
+            req.session.currentUser = oldUser;
+            console.log(req.session)
+            res.json(oldUser);
+        } catch (err) {
+            console.log(err);
+            res.status(400).json({ message: err.message });
+        }
+    };
+
     const deleteUser = async (req, res) => {
         const status = await dao.deleteUser(req.params.userId);
         res.json(status);
@@ -61,13 +105,15 @@ export default function UserRoutes(app) {
     };
     const profile = async (req, res) => {
         const currentUser = req.session["currentUser"];
+        console.log(req.session);
         if (!currentUser) {
             res.sendStatus(401);
             return;
         }
         res.json(currentUser);
     };
-    app.post("/api/users", createUser);
+    app.post("/api/users/register", register);
+    app.post("/api/users/login", login);
     app.get("/api/users", findAllUsers);
     app.get("/api/users/:userId", findUserById);
     app.put("/api/users/:userId", updateUser);

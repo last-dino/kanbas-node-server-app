@@ -15,4 +15,6 @@ export const findUsersByPartialName = (partialName) => {
     return model.find({
         $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
     });
-};  
+};
+
+export const findUserByEmailAddress = (email) => model.findOne({ email: email });
