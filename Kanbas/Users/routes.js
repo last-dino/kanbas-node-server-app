@@ -112,6 +112,38 @@ export default function UserRoutes(app) {
         }
         res.json(currentUser);
     };
+
+    // Get attempts for a specific quiz and user
+    const fetchQuizAttempts = async (req, res) => {
+        const { quizId, userId } = req.params;
+
+        try {
+            const attempts = await findAttemptsForQuiz(userId, quizId);
+
+            if (attempts) {
+                res.json(attempts);
+            } else {
+                res.json(null);
+            }
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    };
+
+    // Update or add a new attempt for a specific quiz and user
+    const updateQuizAttempt = async (req, res) => {
+        const { quizId, userId } = req.params;
+        const attemptData = req.body;
+
+        try {
+            const updatedUser = await updateQuizAttempt(userId, quizId, attemptData);
+
+            res.json(updatedUser);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    };
+
     app.post("/api/users/register", register);
     app.post("/api/users/login", login);
     app.get("/api/users", findAllUsers);
@@ -122,4 +154,6 @@ export default function UserRoutes(app) {
     app.post("/api/users/signin", signin);
     app.post("/api/users/signout", signout);
     app.post("/api/users/profile", profile);
+    app.get("/api/quizzes/:quizId/attempts/:userId", fetchQuizAttempts);
+    app.put('/api/quizzes/:quizId/attempts/:userId', updateQuizAttempt);
 }
