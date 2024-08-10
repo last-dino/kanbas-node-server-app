@@ -17,6 +17,8 @@ export default function UserRoutes(app) {
 
 
             const user = await dao.createUser(req.body);
+            delete user.password;
+            req.session.currentUser = user;
             res.json(user);
         } catch (err) {
             console.log(err);
@@ -69,8 +71,13 @@ export default function UserRoutes(app) {
         res.json(users);
     };
     const findUserById = async (req, res) => {
-        const user = await dao.findUserById(req.params.userId);
-        res.json(user); 
+        try {
+            const user = await dao.findUserById(req.params.userId);
+            res.json(user);
+        } catch (err) {
+            console.log(err);
+            res.status(400).json({ message: err.message });
+        }
     };
     const updateUser = async (req, res) => {
         const { userId } = req.params;
