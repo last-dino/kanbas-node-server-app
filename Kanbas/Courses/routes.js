@@ -1,6 +1,5 @@
 import * as dao from "./dao.js";
 import {checkerUser} from "../../middlwares/checkerUser.js";
-import {checkerUser} from "../../middlwares/checkerUser.js";
 
 export default function CourseRoutes(app) {
     const createCourse = async (req, res) => {
@@ -12,7 +11,6 @@ export default function CourseRoutes(app) {
 
 
     const findAllCourses = async (req, res) => {
-        const user = req.user;
         const user = req.user;
         const courses = await dao.findAllCourses();
 
@@ -46,22 +44,6 @@ export default function CourseRoutes(app) {
     const deleteCourse = async (req, res) => {
         const status = await dao.deleteCourse(req.params.id);
         res.json(status);
-    }
-
-    const enrollCourse = async (req, res) => {
-       try {
-           const user = req.user;
-           if (!user) {
-               return res.status(401).json({ message: "Unauthorized" });
-           }
-
-           const courseId = req.body.courseId;
-           await dao.createStudentCourseRecord(user._id, courseId);
-           res.json({ message: "Enrolled" });
-       } catch (err) {
-              console.log(err);
-              res.status(400).json({ message: err.message });
-       }
     }
 
     const enrollCourse = async (req, res) => {
